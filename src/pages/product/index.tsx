@@ -71,9 +71,10 @@ export default function Product() {
             <div className='grid grid-cols-3 gap-5 p-5'>
                 {
                     filteredProducts.length > 0 ?
-                        filteredProducts.map((item: DataProduct) => {
+                        filteredProducts.map((item: DataProduct, key: number) => {
                             return (
                                 <Card
+                                    key={key}
                                     id={item.id}
                                     title={item.title}
                                     description={item.description}
