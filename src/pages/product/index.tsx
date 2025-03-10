@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 import Layout from '@/components/layout/layout.module'
 import Card from '@/components/card/card.module'
+import { useSession } from 'next-auth/react'
 
 import { data, DataProduct } from '@/dummy/data'
 
@@ -11,6 +12,7 @@ export default function Product() {
     const [category, setCategory] = useState<string>("All")
     const [sort, setSort] = useState<string>("None")
     const router = useRouter()
+    const session = useSession()
 
     const categories = ['All', 'Beras', 'Minyak', 'Gula', 'Telur']
     const sortOptions = ['None', 'Harga Terendah ke Harga Tertinggi', 'Harga Tertinggi ke Terendah']
@@ -34,10 +36,14 @@ export default function Product() {
             }
         })
 
-    console.log('filtered : ', filteredProducts)
-
     return (
         <Layout>
+
+            <div className='w-screen h-14 p-4 flex justify-between bg-slate-700 text-white'>
+                <p>Madura Shop</p>
+                <p>Welcome, {session?.data?.user?.email}</p>
+            </div>
+
             <div className='w-full h-full flex gap-x-5 p-5 bg-red-500 text-black'>
                 <input
                     type="text"
